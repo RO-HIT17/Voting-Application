@@ -4,8 +4,9 @@ import { Avatar, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { getAvatarColor } from '../util/Colors';
 import { formatDateTime } from '../util/Helpers';
-
-import { Radio, Button } from 'antd';
+import PollChart from './PollChart';
+import PollPieChart from './PollPieChart';
+import { Radio, Button, Modal } from 'antd';
 const RadioGroup = Radio.Group;
 
 class Poll extends Component {
@@ -52,6 +53,21 @@ class Poll extends Component {
         }
         
         return timeRemaining;
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            pieVisible: false
+        };
+    }
+
+    showPie = () => {
+        this.setState({ pieVisible: true });
+    }
+
+    hidePie = () => {
+        this.setState({ pieVisible: false });
     }
 
     render() {
@@ -108,8 +124,9 @@ class Poll extends Component {
                 <div className="poll-footer">
                     { 
                         !(this.props.poll.selectedChoice || this.props.poll.expired) ?
-                        (<Button className="vote-button" disabled={!this.props.currentVote} onClick={this.props.handleVoteSubmit}>Vote</Button>) : null 
+                        (<Button className="vote-button" size="small" disabled={!this.props.currentVote} onClick={this.props.handleVoteSubmit}>Vote</Button>) : null 
                     }
+                    <Button size="small" style={{ marginLeft: 6, marginRight: 8 }} onClick={this.showPie}>Vote Share</Button>
                     <span className="total-votes">{this.props.poll.totalVotes} votes</span>
                     <span className="separator">•</span>
                     <span className="time-left">
@@ -119,6 +136,23 @@ class Poll extends Component {
                         }
                     </span>
                 </div>
+
+                {/* Insert chart visualization for poll options */}
+                {this.props.poll.choices && this.props.poll.choices.length > 0 && (
+                    <div className="poll-chart" style={{ marginTop: 20 }}>
+                        <h3>Votes</h3>
+                        <PollChart options={this.props.poll.choices} />
+                    </div>
+                )}
+
+                <Modal
+                    title="Poll Distribution"
+                    visible={this.state.pieVisible}
+                    onCancel={this.hidePie}
+                    footer={null}
+                >
+                    <PollPieChart options={this.props.poll.choices} />
+                </Modal>
             </div>
         );
     }
