@@ -106,9 +106,8 @@
 }
 
 .selected-choice-icon {
-    margin-left: 10px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.75);
+    margin-left: 8px;
+    color: #52c41a; /* green */
 }
 
 .cv-choice-percent-chart {
@@ -124,6 +123,11 @@
 
 .cv-choice-percent-chart.winner {
     background-color: #77C7F7;
+}
+
+.cv-choice-percent-chart.selected {
+  background: linear-gradient(90deg, rgba(82,196,26,0.9), rgba(82,196,26,0.7));
+  box-shadow: 0 1px 6px rgba(82,196,26,0.2) inset;
 }
 
 .poll-creator-info {

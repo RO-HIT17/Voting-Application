@@ -40,8 +40,16 @@ const PollPieChart = ({ options = [], size = 300 }) => {
   let cumulative = 0;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap', padding: 12, borderRadius: 8, background: 'linear-gradient(135deg, rgba(24,144,255,0.06) 0%, rgba(82,196,26,0.04) 50%, rgba(250,173,20,0.03) 100%)' }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <defs>
+          <radialGradient id="bgGrad" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+            <stop offset="60%" stopColor="#f5f7fa" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#e9eef7" stopOpacity="0.45" />
+          </radialGradient>
+        </defs>
+        <rect x="0" y="0" width={size} height={size} fill="url(#bgGrad)" rx="8" />
         {normalized.length === 0 && (
           <text x={cx} y={cy} textAnchor="middle" fill="#999">No data</text>
         )}

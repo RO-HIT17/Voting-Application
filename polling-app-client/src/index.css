@@ -2,6 +2,26 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+  /* Global page background from public/image.png */
+  background-image: url('/image.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f5f7fa; /* fallback */
+}
+
+/* Ensure the main app container is transparent so background shows through */
+.app-container, .app-content {
+  background: transparent !important;
+}
+
+/* Optional: add a subtle page overlay for readability */
+.app-content .container {
+  background: rgba(255,255,255,0.88); /* slightly translucent to improve contrast */
+  border-radius: 6px;
+  padding: 12px;
 }
 
 .container {

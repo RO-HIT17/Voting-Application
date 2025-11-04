@@ -173,10 +173,11 @@ function CompletedOrVotedPollChoice(props) {
                     <Icon
                         className="selected-choice-icon"
                         type="check-circle-o"
+                        style={{ color: '#52c41a' }}
                     /> ): null
                 }    
             </span>
-            <span className={props.isWinner ? 'cv-choice-percent-chart winner': 'cv-choice-percent-chart'} 
+            <span className={`cv-choice-percent-chart ${props.isWinner ? 'winner' : ''} ${props.isSelected ? 'selected' : ''}`} 
                 style={{width: props.percentVote + '%' }}>
             </span>
         </div>
